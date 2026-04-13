@@ -1,0 +1,2 @@
+Runtime Auto-repair Notes:
+  - Agent auto-repair: added fallback Response model for HTTP status handling
