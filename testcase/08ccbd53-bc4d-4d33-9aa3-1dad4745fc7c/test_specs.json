@@ -1,0 +1,16 @@
+{
+  "name": "Functional - User Authentication via /api/authenticate",
+  "description": "Verifies that a user can authenticate with valid credentials and receive a JWT token.",
+  "test_type": "functional",
+  "input": "POST /api/authenticate with JSON body: {\"username\": \"testuser\", \"password\": \"any\"}",
+  "output": "HTTP 200 response with {\"success\": true, \"token\": \"<jwt_token>\"}",
+  "success_criteria": [
+    "HTTP status code is 200",
+    "response.success is True",
+    "response.token is a non-empty string"
+  ],
+  "error_scenarios": [
+    "Missing username in credentials",
+    "Malformed request body"
+  ]
+}
