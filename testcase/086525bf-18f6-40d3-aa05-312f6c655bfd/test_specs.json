@@ -1,0 +1,16 @@
+{
+  "name": "Performance - Policy Cache Expiry and Refresh",
+  "description": "Tests that cached policy content expires after the configured TTL and is refreshed on subsequent queries.",
+  "test_type": "performance",
+  "input": "POST /api/ask with the same user_input twice: once to populate cache, then after TTL expires",
+  "output": "First response is from cache, second triggers retrieval and cache update",
+  "success_criteria": [
+    "First query results in cache hit",
+    "After TTL, cache miss triggers retrieval",
+    "Cache is updated with new content"
+  ],
+  "error_scenarios": [
+    "Cache does not expire as expected",
+    "Cache update fails"
+  ]
+}
