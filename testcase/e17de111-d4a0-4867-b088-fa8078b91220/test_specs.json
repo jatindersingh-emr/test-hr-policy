@@ -1,0 +1,16 @@
+{
+  "name": "Integration - Policy Cache Hit Short-Circuits Retrieval",
+  "description": "Checks that when a query is already cached, the retrieval and embedding services are not called and the cached result is used.",
+  "test_type": "integration",
+  "input": "POST /api/ask with a user_input that has been previously cached",
+  "output": "AgentResponseModel with response generated using cached policy content",
+  "success_criteria": [
+    "PolicyCache.get_cached_policy returns a non-None value",
+    "EmbeddingService.embed_text and RetrievalService.retrieve_policy_content are NOT called",
+    "response.success is True"
+  ],
+  "error_scenarios": [
+    "Cache is unavailable",
+    "Cache returns corrupted data"
+  ]
+}
