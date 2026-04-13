@@ -1,0 +1,23 @@
+=== PYTEST EXECUTION LOG ===
+
+Exit Code: 0
+
+STDOUT:
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /tmp/aba_venv_cache/venv_76cd38b97ac1c7f20a502f7606005784/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.15', 'Platform': 'Linux-5.15.0-1102-azure-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'asyncio': '1.3.0', 'anyio': '4.13.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}}
+rootdir: /tmp/test_venv_exec_94zx9u4j
+configfile: pytest.ini
+plugins: asyncio-1.3.0, anyio-4.13.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+test_agent.py::test_performance_policy_cache_expiry_and_refresh PASSED   [100%]
+
+--------------------------------- JSON report ----------------------------------
+report saved to: /tmp/test_venv_exec_94zx9u4j/pytest_report.json
+============================== 1 passed in 2.24s ===============================
+
+
+STDERR:
