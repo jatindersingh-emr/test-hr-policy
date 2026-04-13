@@ -1,0 +1,54 @@
+=== PYTEST EXECUTION LOG ===
+
+Exit Code: 1
+
+STDOUT:
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /tmp/test_venv_exec_7vs1k_2e/venv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.15', 'Platform': 'Linux-5.15.0-1102-azure-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'asyncio': '1.3.0', 'anyio': '4.13.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}}
+rootdir: /tmp/test_venv_exec_7vs1k_2e
+configfile: pytest.ini
+plugins: asyncio-1.3.0, anyio-4.13.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+test_agent.py::test_functional_successful_hr_policy_query_via_api_ask FAILED [100%]
+
+=================================== FAILURES ===================================
+____________ test_functional_successful_hr_policy_query_via_api_ask ____________
+
+client = <starlette.testclient.TestClient object at 0x7f262f299f50>
+valid_hr_policy_response = {'error_type': None, 'response': "The company's leave policy allows employees 20 days of paid leave per year.", 'success': True}
+
+    def test_functional_successful_hr_policy_query_via_api_ask(client, valid_hr_policy_response):
+        """
+        Functional test:
+        Validates that a user can successfully submit a well-formed HR policy question to the /api/ask endpoint
+        and receive a relevant response.
+        """
+        # Patch the authentication and agent logic to avoid real dependencies
+        with patch("app.api.dependencies.verify_token", side_effect=mock_verify_token) as mock_auth, \
+             patch("app.api.routes.agent.ask_agent", side_effect=mock_agent_ask) as mock_ask:
+    
+            payload = {
+                "user_input": "What is the company's leave policy?",
+                "user_context": {"token": "<valid_token>"}
+            }
+            response = client.post("/api/ask", json=payload)
+            assert response.status_code == 200, "Expected HTTP 200 for valid HR policy query"
+    
+            data = response.json()
+>           assert data["success"] is True, "Expected success=True in response"
+                   ^^^^^^^^^^^^^^^
+E           KeyError: 'success'
+
+test_agent.py:64: KeyError
+--------------------------------- JSON report ----------------------------------
+report saved to: /tmp/test_venv_exec_7vs1k_2e/pytest_report.json
+=========================== short test summary info ============================
+FAILED test_agent.py::test_functional_successful_hr_policy_query_via_api_ask
+============================== 1 failed in 0.29s ===============================
+
+
+STDERR:
