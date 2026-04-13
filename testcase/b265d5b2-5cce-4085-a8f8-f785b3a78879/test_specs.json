@@ -1,0 +1,18 @@
+{
+  "name": "Security - Authentication Required for Protected Endpoint",
+  "description": "Ensures that submitting a query with an invalid or expired JWT token results in an authentication error.",
+  "test_type": "security",
+  "input": "POST /api/ask with user_context containing an invalid or expired token",
+  "output": "HTTP 401 response with error_type='HTTPException' and appropriate error_message",
+  "success_criteria": [
+    "HTTP status code is 401",
+    "response.success is False",
+    "response.error_type is 'HTTPException'",
+    "response.error_message contains 'Session expired' or 'Invalid token'"
+  ],
+  "error_scenarios": [
+    "Token is expired",
+    "Token is malformed",
+    "Token signature is invalid"
+  ]
+}
