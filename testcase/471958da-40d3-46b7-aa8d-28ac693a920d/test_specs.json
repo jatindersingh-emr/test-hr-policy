@@ -1,0 +1,15 @@
+{
+  "name": "Security - PII Masking in Audit Logs",
+  "description": "Ensures that sensitive information such as emails, phone numbers, and SSNs in user queries are masked before being logged by the AuditLogger.",
+  "test_type": "security",
+  "input": "POST /api/ask with user_input containing an email, phone number, and SSN",
+  "output": "Audit log entries with all PII replaced by [REDACTED_*] tokens",
+  "success_criteria": [
+    "AuditLogger.log_event is called with masked values",
+    "No raw email, phone, or SSN appears in logs"
+  ],
+  "error_scenarios": [
+    "PII masking fails",
+    "Unmasked PII appears in logs"
+  ]
+}
