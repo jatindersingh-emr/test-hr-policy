@@ -1,0 +1,17 @@
+{
+  "name": "Performance - HR Policy Query Response Time Under Load",
+  "description": "Measures the average response time of the /api/ask endpoint under concurrent load to ensure it meets performance requirements.",
+  "test_type": "performance",
+  "input": "Simultaneous POST requests (e.g., 50 concurrent) to /api/ask with valid queries and tokens",
+  "output": "Average and percentile response times for all requests",
+  "success_criteria": [
+    "Average response time is below 2 seconds",
+    "99th percentile response time is below 5 seconds",
+    "No more than 5% of requests fail"
+  ],
+  "error_scenarios": [
+    "Service degradation under load",
+    "Timeouts",
+    "Resource exhaustion"
+  ]
+}
