@@ -1,0 +1,19 @@
+{
+  "name": "Integration - End-to-End Query with Cache Miss and LLM Fallback",
+  "description": "Tests the full workflow when a user query is not cached, triggers embedding, retrieval, business rules, and LLM fallback due to missing policy content.",
+  "test_type": "integration",
+  "input": "POST /api/ask with user_input that does not match any policy content (e.g., 'What is the company\u2019s spaceship policy?')",
+  "output": "AgentResponseModel with fallback response indicating escalation to HR.",
+  "success_criteria": [
+    "EmbeddingService.embed_text is called",
+    "RetrievalService.retrieve_policy_content is called",
+    "BusinessRulesEngine.validate_policy_answer returns valid=False",
+    "LLMService.fallback_response is returned in response.response",
+    "AuditLogger.log_event is called for escalation"
+  ],
+  "error_scenarios": [
+    "Embedding service unavailable",
+    "Retrieval service unavailable",
+    "LLM API failure"
+  ]
+}
